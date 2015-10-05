@@ -22,12 +22,10 @@ function getMeta(messages, callback) {
             timeout: 2000
           };
           ogs(options, function (err, meta) {
-            if (err) {
-              reject(err);
-            } else {
+            if (!err) {
               message.meta = meta;
-              resolve(message);
             }
+            resolve(message);
           });
         });
       });
