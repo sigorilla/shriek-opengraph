@@ -11,7 +11,7 @@ describe('Messages', function() {
 
   var result;
 
-  beforeEach(function (done) {
+  before(function (done) {
     new Promise(function (resolve, reject) {
       shriekGraph(testmsgs, function (err, data) {
         if (err) {
@@ -30,7 +30,7 @@ describe('Messages', function() {
       });
   });
 
-  afterEach(function (done) {
+  after(function (done) {
     result = undefined;
     done();
   });
