@@ -1,0 +1,22 @@
+{
+  "name": "shriek-opengraph",
+  "version": "0.1.0",
+  "description": "Opengraph for another chat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Igor Stepanov <sigorilla@gmail.com> (http://igorstepanov.me)",
+  "license": "MIT",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/sigorilla/shriek-opengraph.git"
+  },
+  "dependencies": {
+    "open-graph-scraper": "1.0.1"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*"
+  }
+}
