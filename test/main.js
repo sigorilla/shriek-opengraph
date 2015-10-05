@@ -3,21 +3,21 @@ var chai = require('chai');
 var mocha = require('mocha');
 var should = chai.should();
 
-describe('Url', function() {
-  var testurl = 'http://ogp.me';
-  var testmsg = {
-    text: testurl
-  };
+describe('Messages', function() {
+  var testurl = 'http://ya.ru';
+  var testmsgs = [{
+    text: '<p>' + testurl + '</p>'
+  }];
 
   var result;
 
   beforeEach(function (done) {
     new Promise(function (resolve, reject) {
-      shriekGraph([testmsg], function (err, data) {
+      shriekGraph(testmsgs, function (err, data) {
         if (err) {
           reject(err);
         }
-        resolve(data[0]);
+        resolve(data);
       });
     })
       .then(function (data) {
@@ -35,18 +35,23 @@ describe('Url', function() {
     done();
   });
 
-  it('should have array meta', function (done) {
-    result.should.have.property('meta');
+  it('should be an array', function (done) {
+    result.should.be.an('array');
     done();
   });
 
-  it('should have property data in meta', function (done) {
-    result.meta.should.have.property('data');
+  it('should have property meta', function (done) {
+    result[0].should.have.property('meta');
+    done();
+  });
+
+  it('should have property ogTitle in meta.data', function (done) {
+    result[0].meta.data.should.have.property('ogTitle');
     done();
   });
 
   it('should have property text', function (done) {
-    result.should.have.property('text');
+    result[0].should.have.property('text');
     done();
   });
 });
