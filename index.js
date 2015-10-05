@@ -27,20 +27,21 @@ function getMeta(messages, callback) {
             ogs(options, function (err, meta) {
               if (!err) {
                 message.meta = meta;
-                message.text += '<blockquote><pre>' +
-                  '<a href="' +
+                message.meta = meta;
+                var img = ('ogImage' in meta.data) ? ('<img align="right" src="'+
+                  meta.data.ogImage.url +
+                  '" height="100">') : '';
+                message.text += '<blockquote>' +
+                  ((img !== '') ? ('<a href="' +
                   (meta.data.ogUrl || url) +
-                  '" target="_blank"><img align="right" src="'+
-                  (meta.data.ogImage.url || '') +
-                  '" height="' +
-                  (meta.data.ogImage.height || '100') + '"></a>' +
+                  '" target="_blank">' + img + '</a>') : '') +
                   '<p><a href="' +
                   (meta.data.ogUrl || url) +
                   '" target="_blank"><strong>' +
                   (meta.data.ogTitle || url) +
                   '</strong></a></p>' +
                   '<p>' + (meta.data.ogDescription || '') + '</p>' +
-                  '</pre></blockquote>';
+                  '</blockquote>';
               }
               resolve(message);
             });
