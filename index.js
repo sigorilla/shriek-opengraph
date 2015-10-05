@@ -1,8 +1,8 @@
 var ogs = require('open-graph-scraper');
 
-function getUrls(text) {
-  var urlRegex = /(https?:\/\/[^\s]+)/g;
-  var url;
+function getUrl(text) {
+  var urlRegex = /(https?:\/\/[^\s<\[]+)/g;
+  var url = '';
 
   if ((urlArr = urlRegex.exec(text)) !== null) {
     url = urlArr[0];
@@ -17,16 +17,20 @@ function getMeta(messages, callback) {
       return prev.then(function (data) {
         return new Promise(function (resolve, reject) {
           message.meta = message.meta || {};
-          var options = {
-            url: getUrls(message.text),
-            timeout: 2000
-          };
-          ogs(options, function (err, meta) {
-            if (!err) {
-              message.meta = meta;
-            }
+          if ((url = getUrl(message.text)) === '') {
             resolve(message);
-          });
+          } else {
+            var options = {
+              url: url,
+              timeout: 2000
+            };
+            ogs(options, function (err, meta) {
+              if (!err) {
+                message.meta = meta;
+              }
+              resolve(message);
+            });
+          }
         });
       });
     }, Promise.resolve())
