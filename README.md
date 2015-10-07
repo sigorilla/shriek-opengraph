@@ -1,3 +1,3 @@
-# Shriek Markdown
+# Shriek Open Graph
 
 For another chat
